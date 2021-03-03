@@ -1,10 +1,10 @@
 class Movie < ApplicationRecord
-  belongs_to :user, optional: true
+  has_many :users_favorite_movies, dependent: :destroy
+  has_many :users, through: :users_favorite_movies
 
-  validates :name, :genres, :is_favorite, presence: true
+  validates :name, :genres, :favorited, presence: true
   validates :year, presence: true, numericality: { only_integer: true }
 
-  enum is_favorite: {unfavorite: 0, favorite: 1}
 
   MOVIE_GENRES = [
     "Action",

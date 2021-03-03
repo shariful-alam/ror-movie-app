@@ -1,4 +1,4 @@
-class MoviesController < ApplicationController
+class Admin::MoviesController < ApplicationController
 
   before_action :authenticate_admin_user!
   before_action :set_movie, except: [:index]
@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to movies_path, notice: 'Movie has been created successfully.'
+      redirect_to admin_movies_path, notice: 'Movie has been created successfully.'
     else
       render :new
     end
@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      redirect_to movies_path, notice: 'Movie has been updated successfully.'
+      redirect_to admin_movies_path, notice: 'Movie has been updated successfully.'
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
 
   def destroy
     if @movie && @movie.destroy
-      redirect_to movies_path, notice: 'Movie has been deleted.'
+      redirect_to admin_movies_path, notice: 'Movie has been deleted.'
     else
       render :index
     end
@@ -51,6 +51,6 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(:name, :year, :director, :main_star, :description, :is_favorite, :genres => [])
+    params.require(:movie).permit(:name, :year, :director, :main_star, :description, :genres => [])
   end
 end

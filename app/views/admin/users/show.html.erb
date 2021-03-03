@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h2>User: <%= @user.username %></h2>
+  </div>
+  <div class="card-body">
+    <h4>Favorited Movies:</h4>
+    <ul class="movie-names">
+      <% @user.users_favorite_movies.each do |favorited_movie| %>
+        <li><%= favorited_movie.movie.name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Back', :back, class: "btn btn-dark" %>
+  </div>
+</div>

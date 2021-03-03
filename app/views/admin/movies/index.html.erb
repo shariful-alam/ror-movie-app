@@ -1,0 +1,28 @@
+<%= link_to "Add Movie", new_admin_movie_path, class: "btn btn-dark", style: "float:right" %>
+<h1>All Movies</h1>
+<table class="table table-bordered" id="movies_list_table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Year</th>
+    <th># times favorited</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @movies.each do |movie| %>
+    <tr>
+      <td><%= link_to movie.name, edit_admin_movie_path(movie) %></td>
+      <td><%= movie.year %></td>
+      <td><%= movie.favorited %></td>
+      <td>
+        <%= link_to 'Delete',admin_movie_path(movie), method: :delete, data: {confirm: 'Are you sure?'} %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div>
+  <%= link_to "Back", :back, class: "btn btn-dark" %>
+</div>

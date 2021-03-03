@@ -1,0 +1,25 @@
+<h1>All Users</h1>
+<table class="table table-bordered" id="users_list_table">
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th># favorited movies</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, admin_user_path(user) %></td>
+      <td><%= user.users_favorite_movies.count %></td>
+      <td>
+        <%= link_to 'Delete',admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'} %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div>
+  <%= link_to "Back", :back, class: "btn btn-dark" %>
+</div>
