@@ -10,30 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_125011) do
+ActiveRecord::Schema.define(version: 2021_03_03_151039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admin_users", force: :cascade do |t|
-    t.string "email"
-    t.string "password"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
   end
 
   create_table "movies", force: :cascade do |t|
     t.string "name", limit: 80, null: false
-    t.integer "genres", null: false, array: true
     t.string "year", null: false
     t.string "director", limit: 60
     t.string "main_star", limit: 60
     t.text "description"
     t.integer "is_favorite", default: 0
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_movies_on_user_id"
+    t.string "genres", null: false, array: true
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,5 +42,4 @@ ActiveRecord::Schema.define(version: 2021_03_03_125011) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "movies", "users"
 end
