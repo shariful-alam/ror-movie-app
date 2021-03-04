@@ -47,9 +47,7 @@ Check if user exists in the database.
 
   ```json
   {
-      "user": {
-          "username": "test_user"
-      }
+      "username": "test_user"
   }
   ```
 

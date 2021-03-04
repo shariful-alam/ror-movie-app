@@ -3,8 +3,8 @@ class Api::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    user = User.find_by_username(params[:username])
-    if user
+    user = User.find_by(username: params[:username])
+    if user.present?
       render json: {status: 409, message: 'User already exists.'}
     else
       User.create(username: params[:username])
